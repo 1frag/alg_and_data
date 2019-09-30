@@ -3,8 +3,16 @@
 # элементов и выводит результат на экран.
 
 
+def eval_sum(lst):
+    return sum(map(int, lst.split()))
+
+
+def get_lst():
+    return (input(), input())[1]
+
+
 def main():
-    return (input(), sum(map(int, input().split())))[1]
+    return eval_sum(get_lst())
 
 
 if __name__ == '__main__':

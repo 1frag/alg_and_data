@@ -5,11 +5,31 @@
 # цена поездок была минимальна.
 
 
-def main():
-    [n], kms, costs = map(lambda lst: list(map(int, input().split())), '...')
-    ord_kms, costs = sorted(range(n), key=lambda x: kms[x]), sorted(costs, reverse=True)
-    weight = dict(map(lambda x: x[::-1], enumerate(ord_kms)))
+def refactor_from_input():
+    return list(map(int, input().split()))
+
+
+def collect_input_data():
+    return map(refactor_from_input, range(3))
+
+
+def get_sorted_lists(n, kms, costs):
+    return sorted(range(n), key=lambda x: kms[x]), sorted(costs, reverse=True)
+
+
+def get_weight(ord_kms):
+    return dict(map(lambda x: x[::-1], enumerate(ord_kms)))
+
+
+def generate_answer(kms, costs, weight, n):
     return '\n'.join(map(lambda x: f'{kms[x]} {costs[weight[x]]}', range(n)))
+
+
+def main():
+    [n], kms, costs = collect_input_data()
+    ord_kms, costs = get_sorted_lists(n, kms, costs)
+    weight = get_weight(ord_kms)
+    return generate_answer(kms, costs, weight, n)
 
 
 if __name__ == '__main__':

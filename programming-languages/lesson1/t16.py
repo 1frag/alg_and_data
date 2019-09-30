@@ -21,22 +21,46 @@ def get_indexes():
     return [(2, 0), (3, 1), (4, 2), (5, 3), (0, 4), (1, 5)]
 
 
+def make_triangle_from_input():
+    return list(map(int, input().split()))
+
+
 def collect(num):
-    triangle = lambda: list(map(int, input().split()))
-    return (num and collect(num - 1) + [triangle()]) or [triangle()]
+    _ = make_triangle_from_input
+    return (num and collect(num - 1) + [_()]) or [_()]
 
 
-def output(row, scale=None):
+def make_scaling(x, scale, row):
+    return str(scale * (row[x[0]] - row[x[1]]))
+
+
+def output(row, scale):
     return ' '.join(map(
-        lambda x: str(scale * (row[x[0]] - row[x[1]])),
+        lambda x: make_scaling(x, scale, row),
         get_indexes()
     ))
 
 
+def put_default_scale(scale):
+    output.__defaults__ = (scale, )
+
+
+def get_scale():
+    return int(input())
+
+
+def get_count():
+    return int(input()) - 1
+
+
+def get_total_data(pre_data):
+    return '\n'.join(map(output, pre_data))
+
+
 def main():
-    data = collect(int(input()) - 1)
-    output.__defaults__ = (int(input()), )
-    return '\n'.join(map(output, data))
+    data = collect(get_count())
+    put_default_scale(get_scale())
+    return get_total_data(data)
 
 
 if __name__ == '__main__':
