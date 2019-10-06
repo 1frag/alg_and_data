@@ -4,11 +4,15 @@
 # Использование массивов и строк в этой задаче запрещено.
 
 
-def main(num, res=0):
-    res = (num > 9) and main(num // 10)
+def get_number_from_input():
+    return int(input())
+
+
+def fun(num, res=0):
+    res = (num > 9) and fun(num // 10)
     res = ((num % 2) and (res * 10 + num % 10)) or res
     return int(res)
 
 
 if __name__ == '__main__':
-    print(main(int(input())))
+    print(fun(get_number_from_input()))

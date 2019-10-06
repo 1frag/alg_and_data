@@ -34,7 +34,7 @@ def make_scaling(x, scale, row):
     return str(scale * (row[x[0]] - row[x[1]]))
 
 
-def output(row, scale):
+def output(row, scale=None):
     return ' '.join(map(
         lambda x: make_scaling(x, scale, row),
         get_indexes()
@@ -54,6 +54,7 @@ def get_count():
 
 
 def get_total_data(pre_data):
+    put_default_scale(get_scale())
     return '\n'.join(map(output, pre_data))
 
 
@@ -64,7 +65,8 @@ def main():
 
 
 if __name__ == '__main__':
-    print(main())
+    print(get_total_data(collect(get_count())))
+
 
 """
 3

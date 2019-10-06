@@ -11,9 +11,5 @@ def get_lst():
     return (input(), input())[1]
 
 
-def main():
-    return eval_sum(get_lst())
-
-
 if __name__ == '__main__':
-    print(main())
+    print(eval_sum(get_lst()))
