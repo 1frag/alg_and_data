@@ -4,6 +4,9 @@ import time
 import signal
 
 
+threads = list()
+
+
 class MyCondition(Condition):
     useful_meta = None
 
@@ -52,7 +55,9 @@ class MainThread(Thread):
         with self.condition:
             self.condition.useful_meta = -1
             self.condition.notify_all()
-        time.sleep(2)
+        for t in threads:
+            t.join()
+        time.sleep(0.1)
 
 
 def main():
@@ -60,7 +65,6 @@ def main():
     cond = MyCondition()
 
     main_thread = MainThread(count=n, condition=cond)
-    threads = list()
 
     for name in map(str, range(1, n + 1)):
         threads.append(SimpleThread(name=name, condition=cond))

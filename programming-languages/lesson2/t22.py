@@ -47,9 +47,6 @@ class Executor:
 
         self.loop.run_until_complete(asyncio.wait(futures))
 
-    def callback(self, args):
-        print([fut.result() for fut in args])
-
     def data(self, code, tasks):
         fut = self.loop.create_future()
         fut.add_done_callback(self.collector.callback)
